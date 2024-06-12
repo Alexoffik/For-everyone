@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Alexoffik">
+    <title>База данных</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='table_style.css') }}">
+
+</head>
+<body>
+    <div class="data-input-block">
+
+        <h1 class="main-labels">Введите ваши данные</h1>
+        
+        <form action="/submit" method="post">
+            <div class="input-box">
+                <input class="main-input" type="text" id="first_name" name="first_name" required placeholder="Имя">
+            </div>
+                
+            <div class="input-box">
+                <input class="main-input" type="text" id="last_name" name="last_name" required placeholder="Фамилия">
+            </div>
+
+            <div class="input-box">
+                <input class="main-input" type="text" id="gender" name="gender" required placeholder="Пол">
+            </div>
+
+            <div class="input-box">
+                <input class="main-input" type="number" id="age" name="age" required placeholder="Возраст"><br>
+            </div>
+
+            <button class="action-buttons inp" type="submit">Внести данные</button>
+        </form>
+    </div>
+    <div class="data-output-block">
+        <h1 class="main-labels">Пользователи</h1>
+        <table class="main_table">
+            <tr class="table_hotizontal">
+                <th class="table_hotizontal">ID</th>
+                <th class="table_hotizontal">Имя</th>
+                <th class="table_hotizontal">Фамилия</th>
+                <th class="table_hotizontal">Пол</th>
+                <th class="table_hotizontal">Возраст</th>
+            </tr>
+            {% for user in users %}
+            <tr class="table_vertical">
+                <td class="table_vertical">{{ user.id }}</td>
+                <td class="table_vertical">{{ user.first_name }}</td>
+                <td class="table_vertical">{{ user.last_name }}</td>
+                <td class="table_vertical">{{ user.gender }}</td>
+                <td class="table_vertical">{{ user.age }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div>
+        <form action="/clear" method="post">
+            <button class="action-buttons out" type="submit">Очистить базу данных</button>
+        </form>
+    </div>
+</body>
+</html>
